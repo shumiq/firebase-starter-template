@@ -10,8 +10,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import { Link } from "react-router-dom";
+import useAuth from "../../utils/hooks/useAuth";
 
 export default function Menu({ open, onClose }) {
+  const { user } = useAuth();
   return (
     <Drawer open={open} onClose={onClose}>
       <List sx={{ minWidth: "250px" }}>
@@ -22,35 +24,37 @@ export default function Menu({ open, onClose }) {
           onClick={onClose}
         />
         <MenuItem
-          label={"Login"}
+          label={user ? user.email : "Login"}
           to={"/login"}
           icon={<AccountCircleIcon />}
           onClick={onClose}
         />
-        <MenuItem
-          label={"Stock"}
-          to={"/stock"}
-          icon={<Inventory2Icon />}
-          onClick={onClose}
-        />
+        {user !== null && (
+          <MenuItem
+            label={"Stock"}
+            to={"/stock"}
+            icon={<Inventory2Icon />}
+            onClick={onClose}
+          />
+        )}
       </List>
     </Drawer>
   );
 }
 
-const MenuItem = ({ icon, label, to, onClick }) => {
+const MenuItem = ({icon, label, to, onClick}) => {
   return (
-    <ListItem
-      disablePadding
-      as={Link}
-      to={to}
-      sx={{ color: "initial" }}
-      onClick={onClick}
-    >
-      <ListItemButton>
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={label} />
-      </ListItemButton>
-    </ListItem>
+      <ListItem
+          disablePadding
+          as={Link}
+          to={to}
+          sx={{color: "initial"}}
+          onClick={onClick}
+      >
+        <ListItemButton>
+          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemText primary={label}/>
+        </ListItemButton>
+      </ListItem>
   );
 };
