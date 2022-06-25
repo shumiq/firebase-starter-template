@@ -9,7 +9,7 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../utils/hooks/useAuth";
 
 export default function Menu({ open, onClose }) {
@@ -42,19 +42,20 @@ export default function Menu({ open, onClose }) {
   );
 }
 
-const MenuItem = ({icon, label, to, onClick}) => {
+const MenuItem = ({ icon, label, to, onClick }) => {
+  const navigate = useNavigate();
   return (
-      <ListItem
-          disablePadding
-          as={Link}
-          to={to}
-          sx={{color: "initial"}}
-          onClick={onClick}
-      >
-        <ListItemButton>
-          <ListItemIcon>{icon}</ListItemIcon>
-          <ListItemText primary={label}/>
-        </ListItemButton>
-      </ListItem>
+    <ListItem
+      disablePadding
+      onClick={() => {
+        navigate(to);
+        onClick();
+      }}
+    >
+      <ListItemButton>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={label} />
+      </ListItemButton>
+    </ListItem>
   );
 };
