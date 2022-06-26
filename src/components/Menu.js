@@ -10,7 +10,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../utils/hooks/useAuth";
+import useAuth from "../utils/hooks/useAuth";
 
 export default function Menu({ open, onClose }) {
   const { user } = useAuth();
