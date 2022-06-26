@@ -15,7 +15,7 @@ export default function EditStock() {
       get(id).then((d) => {
         if (d) setData(d);
       });
-  }, [id]);
+  }, [id, get]);
 
   const handleSubmit = () => {
     const value = Object.fromEntries(

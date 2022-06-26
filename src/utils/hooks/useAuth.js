@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function useAuth() {
   const auth = getAuth();
   const [user, setUser] = useState(null);
-  useEffect(() => auth.onAuthStateChanged((user) => setUser(user)), []);
+  useEffect(() => auth.onAuthStateChanged((user) => setUser(user)), [auth]);
 
   return {
     user: user,

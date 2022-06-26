@@ -25,7 +25,7 @@ export default function useDatabase(collectionName) {
         );
         setSnapshot(data);
       }),
-    []
+    [db, collectionName]
   );
   return {
     snapshot,
